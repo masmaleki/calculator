@@ -1,0 +1,55 @@
+{
+    "name": "masmaleki/calculator",
+    "description": "Simple Laravel Transaction fee Calculator for laravel 8|9",
+    "keywords": [
+        "masmaleki",
+        "calculator"
+    ],
+    "homepage": "https://github.com/masmaleki/calculator",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "MohammadSadegh Maleki",
+            "email": "masmaleki@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0|^9.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0|^7.0",
+        "phpunit/phpunit": "^8.0|^9.0",
+        "nesbot/carbon": "^2.53",
+    },
+    "autoload": {
+        "psr-4": {
+            "Masmaleki\\Calculator\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Masmaleki\\Calculator\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Masmaleki\\Calculator\\CalculatorServiceProvider"
+            ],
+            "aliases": {
+                "Calculator": "Masmaleki\\Calculator\\CalculatorFacade"
+            }
+        }
+    }
+}
