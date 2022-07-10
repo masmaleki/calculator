@@ -2,7 +2,6 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/masmaleki/calculator.svg?style=flat-square)](https://packagist.org/packages/masmaleki/calculator)
 [![Total Downloads](https://img.shields.io/packagist/dt/masmaleki/calculator.svg?style=flat-square)](https://packagist.org/packages/masmaleki/calculator)
-![GitHub Actions](https://github.com/masmaleki/calculator/actions/workflows/main.yml/badge.svg)
 
 This package is just for using in an internal project, and it's not use full for all projects,but you can use it and extend it based on your needs.
 
