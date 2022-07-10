@@ -23,6 +23,11 @@ Then call this url in your browser:
 ```php
 http://127:0.0.1:8000/calculator
 ```
+Then you should see this:
+![image](https://user-images.githubusercontent.com/5430351/178139960-4f046c5f-c843-4421-b00f-c15fdb5cef23.png)
+
+After submiting the form you will see the table of trasaction with the calculated commissions based on your rules
+![image](https://user-images.githubusercontent.com/5430351/178139878-2c62cf25-4034-404b-b137-9eabb7270908.png)
 
 ## Publish Resources
 If you want to modify the config file for rates or Rate API url or view and asset files you need to run the below commands:
