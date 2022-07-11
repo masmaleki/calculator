@@ -20,13 +20,19 @@ class Calculator
         return $inputs;
     }
 
-    public static function calculate($inputs): Collection|RedirectResponse
+    public static function calculate($inputs,$mode = null): Collection|RedirectResponse
     {
         try {
             $file = fopen($inputs, "r");
             $transactions = collect();
             $clients = collect();
             $index = 1;
+            if ($mode == 'test'){
+                $rates = (object) config('calculator.currencies');
+            }
+            else{
+                $rates =  self::getRates();
+            }
             while ( ($data = fgetcsv($file, 0, ',') ) !== FALSE) {
 
                 $client = $clients->where('id',$data[1])->first();
@@ -56,7 +62,8 @@ class Calculator
                 $client_transactions = $transactions->where('client_id',$client->id)->sortBy('date')->all();
                 foreach ($client_transactions as $transaction){
                     $commission_fee = config('calculator.commission_fees.'.$client->type.'.'.$transaction->type);
-                    $rate = self::getCalcRate($transaction);
+                    
+                    $rate = self::getRate($transaction->currency, $rates);
                     $euro_amount = $transaction->amount / $rate;
 
                     if ($transaction->type == 'withdraw' && $client->type == 'private'){
@@ -73,9 +80,12 @@ class Calculator
                         }
                     }
 
-                    $fee = $euro_amount * $commission_fee;
-                    if ($fee > 0.1){
-                        $transaction->commission = number_format(round($fee,1),2);
+                    $fee = $euro_amount * $commission_fee * $rate;
+                    if ($transaction->currency == 'JPY'){
+                        $fee =  ceil($fee);
+                        $transaction->commission = $fee;
+                    }elseif ($fee > 0.1){
+                        $transaction->commission = round($fee,1);
                     }else{
                         $transaction->commission = round($fee,2);
                     }
@@ -101,16 +111,7 @@ class Calculator
             }
         }
     }
-    public static function getCalcRate($transaction,$mode = null): float|int
-    {
-        $rates =  self::getRates();
-        if ($mode == 'test' || config('calculator.mode') == 'test'){
-            $rate = config('calculator.currencies.'.$transaction->currency);
-        }else{
-            $rate = self::getRate($transaction->currency, $rates);
-        }
-        return $rate;
-    }
+   
     public static function getRates(){
         $curlSession = curl_init();
         curl_setopt($curlSession, CURLOPT_URL, config('calculator.rate_url'));
@@ -120,6 +121,7 @@ class Calculator
         return $jsonRates;
     }
     public static function getRate($currency,$rates){
+        
         return $rates->$currency;
     }
 }

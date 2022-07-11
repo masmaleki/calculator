@@ -37,7 +37,7 @@
                     <th scope="col">Transaction Type</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Current</th>
-                    <th scope="col">Commission Fee (EUR)</th>
+                    <th scope="col">Commission Fee</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,7 +50,7 @@
                     <td>{{$tr->type}}</td>
                     <td>{{$tr->amount}}</td>
                     <td>{{$tr->currency}}</td>
-                    <td>{{$tr->commission}}</td>
+                    <td>@if($tr->currency == 'JPY') {{ceil($tr->commission)}} @else {{$tr->commission}} @endif</td>
                 </tr>
                 @endforeach
                 </tbody>
