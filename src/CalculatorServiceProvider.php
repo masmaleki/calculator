@@ -28,6 +28,10 @@ class CalculatorServiceProvider extends ServiceProvider
                 __DIR__.'/resources/assets' => public_path('vendor/calculator'),
             ], 'Calculator-Assets');
 
+            $this->publishes([
+                __DIR__.'/../tests' => public_path('../tests/Unit'),
+            ], 'Calculator-Tests');
+
         }
     }
 
