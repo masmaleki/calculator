@@ -13,10 +13,15 @@ class TransactionCalculatorTest extends TestCase
     public static function calculationTest()
     {
         $inputs = Calculator::getSampleInputs();
-        $transactions = Calculator::calculate($inputs);
+        $transactions = Calculator::calculate($inputs,'test');
         $fees = [];
         foreach ($transactions as $tr){
-            $fees[] =  $tr->commission;
+            if ($tr->currency == 'JPY'){
+                $fees[] =  ceil($tr->commission);
+            }else{
+                $fees[] =  $tr->commission;
+            }
+
         }
         $expected_result = self::getSampleResults();
         static::assertEquals($expected_result, $fees);
