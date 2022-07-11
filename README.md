@@ -31,7 +31,7 @@ After submiting the form you will see the table of trasaction with the calculate
 ## Publish Resources
 If you want to modify the config file for rates or Rate API url or view and asset files you need to run the below commands:
 
-```php
+```bash
 php artisan vendor:publish --tag=Calculator-Assets
 php artisan vendor:publish --tag=Calculator-Config
 php artisan vendor:publish --tag=Calculator-Views
@@ -62,25 +62,13 @@ There is pre-defined values in the config file which you can  publish the config
 
     'rate_url' => env('CALC_RATE_URL', 'https://developers.paysera.com/tasks/api/currency-exchange-rates'),
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Calculator App Mode
-    |--------------------------------------------------------------------------
-    |
-    | All Calculations goes with the test rates and test input file, if using the App test mode
-    |
-    | Supported: "live", "test"
-    |
-    */
-    'mode' => env('CALC_MODE', 'live'),
-
     'limit' => env('CALC_limit', 1000),
 ```
 ### Testing
-
+For testing first you should publish the package test then run the laravel test command. follow this :
 ```bash
-composer test
+php artisan vendor:publish --tag=Calculator-Tests
+php artisan test
 ```
 
 ### Changelog

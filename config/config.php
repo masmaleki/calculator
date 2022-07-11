@@ -27,19 +27,6 @@ return [
 
     'rate_url' => env('CALC_RATE_URL', 'https://developers.paysera.com/tasks/api/currency-exchange-rates'),
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | Calculator App Mode
-    |--------------------------------------------------------------------------
-    |
-    | All Calculations goes with the test rates and test input file, if using the App test mode
-    |
-    | Supported: "live", "test"
-    |
-    */
-    'mode' => env('CALC_MODE', 'live'),
-
     'limit' => env('CALC_limit', 1000),
 
 
